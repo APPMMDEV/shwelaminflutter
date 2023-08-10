@@ -1,0 +1,34 @@
+class ConstsName{
+  static const appname = 'ရွှေလမင်း ကုန်စုံဆိုင်';
+  static const Products = 'ပစ္စည်းစာရင်း';
+  static const ProductSaleList = 'အရောင်းစာရင်း';
+  static const addnew = 'အသစ်ထည့်မည်';
+  static const proudctname = 'ပစ္စည်းအမည်';
+  static const real_price = 'ဝယ်ဈေး';
+  static const sale_price = 'ရောင်းဈေး';
+  static const quantity = 'အရေအတွက်';
+  static const labelreal_price = 'ဝယ်ဈေး  * အင်္ဂလိပ်ဂဏန်း ဖြစ်ရပါမည်။';
+  static const labelsale_price = 'ရောင်းဈေး  * အင်္ဂလိပ်ဂဏန်း ဖြစ်ရပါမည်။';
+  static const labelquantity = 'အရေအတွက် * အင်္ဂလိပ် ဂဏန်း ဖြစ်ရပါမည်။';
+  static const nos = 'စဉ်';
+  static const note = 'မှတ်ချက်';
+  static const save = 'သိမ်းမည်';
+  static const update = 'ပြောင်းလဲမည်';
+  static const delete = 'ဖျက်မည်';
+  static const edit = 'ပြင်ဆင်မည်';
+  static const search = 'ရှာဖွေမည်';
+  static const error = 'တစ်စုံတစ်ခု မှားယွင်းနေပါသည်။';
+  static const successfullysave = 'သိမ်းဆည်းမှု့ အောင်မြင်ပါသည်။';
+  static const successfullyupdate = 'ပြင်ဆင်မှု့အောင်မြင်ပါသည်။';
+  static const loading = 'လုပ်ဆောင်နေပါသည်။';
+  static const successfullydelete = 'အချက်အလက်ဖျက်သိမ်းမှု့ အောင်မြင်ပါသည်။';
+  static const deletefail = 'အချက်အလက်ဖျက်သိမ်းမှု့မအောင်မြင်ပါ။';
+  static const finished = 'ပြီး။';
+  static const saving = 'သိမ်းဆည်းနေပါသည်။';
+  static const updating = 'ပြင်ဆင်နေပါသည်။';
+  static const vialidnumber = 'အင်္ဂလိပ် နံပါတ် ဖြစ်ရပါမည်။';
+  static const lastmodifiedDate = 'နောက်ဆုံးပြင်ဆင်ခဲ့သည့်ရက်စွဲ';
+  static const addtocard = 'နောက်ဆုံးပြင်ဆင်ခဲ့သည့်ရက်စွဲ';
+  static const serverURL = 'https://bswwgpraixghzllrqiaf.supabase.co';
+  static const serverApiKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJzd3dncHJhaXhnaHpsbHJxaWFmIiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTExNTMwMDIsImV4cCI6MjAwNjcyOTAwMn0.R6T0OlVbdQLOK2eTr1buwoOUYgdccaf0rVd1D5HIAtA';
+}
