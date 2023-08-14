@@ -11,18 +11,15 @@ import 'package:shwelamin/modal/importproductModal.dart';
 import 'package:shwelamin/myComponents.dart';
 import 'package:shwelamin/pages/addnewimportdata.dart';
 import 'package:shwelamin/pages/_webCardProduct.dart';
-import 'package:shwelamin/pages/outOfStock.dart';
 
-import '_mobileCartPorductPage.dart';
-
-class StockPage extends StatefulWidget {
-  const StockPage({super.key});
+class OutOfStockPage extends StatefulWidget {
+  const OutOfStockPage({super.key});
 
   @override
-  State<StockPage> createState() => _StockPageState();
+  State<OutOfStockPage> createState() => _OutOfStockPageState();
 }
 
-class _StockPageState extends State<StockPage> {
+class _OutOfStockPageState extends State<OutOfStockPage> {
   final ImportDataRepository inputDataRepository = ImportDataRepository();
 
   final List<ImportModal> _filteredData = [];
@@ -30,7 +27,6 @@ class _StockPageState extends State<StockPage> {
   String _searchText = '';
 
   final _totalProdcts ='';
-
 
 
   @override
@@ -62,18 +58,7 @@ class _StockPageState extends State<StockPage> {
                 margin: EdgeInsets.only(right: 10),
                 child: IconButton(onPressed: (){
 
-                  Navigator.of(context).push(MaterialPageRoute(builder: (context)=>
-
-                    Platform.isAndroid?
-                    MobileCardProdctPage()
-                    :MyCartProductsPage()
-                  )).then((value){
-
-                    setState(() {
-
-
-                    });
-                  });
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context)=>MyCartProductsPage()));
 
 
                 }, icon: Icon(CupertinoIcons.cart_fill,color: Colors.white,size: 40,)),
@@ -87,11 +72,7 @@ class _StockPageState extends State<StockPage> {
                   decoration: BoxDecoration(shape: BoxShape.circle,color: Colors.red),
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Text(Platform.isAndroid?
-                    ConstsData.mobilecartProducts.length.toString()
-                    :
-
-                    ConstsData.cartProducts.length.toString()),
+                    child: Text(ConstsData.cartProducts.length.toString()),
                   ),
                 ),
               )
@@ -150,7 +131,6 @@ class _StockPageState extends State<StockPage> {
                             .trim()
                             .contains(_searchText.toLowerCase().trim()))
                         .toList();
-
                     return isAndroid
                         // ? _webContainer(filteredData)
                         ? _androidContainer(filteredData)
@@ -186,6 +166,26 @@ class _StockPageState extends State<StockPage> {
       ),
 
 
+
+      // floatingActionButton: Container(
+      //   margin: const EdgeInsets.only(bottom: 50),
+      //   child: FloatingActionButton.extended(
+      //     onPressed: () {
+      //       Navigator.push(
+      //           context,
+      //           MaterialPageRoute(
+      //               builder: (context) =>
+      //                   const AddNewImportProduct(updateModal: null)));
+      //       // Add your onPressed code here!
+      //     },
+      //     label: const Text(ConstsName.addnew,style: TextStyle(fontSize: 12),),
+      //     icon: const Icon(Icons.add_task),
+      //     backgroundColor: Colors.pink,
+      //   ),
+      //
+      //
+      //
+      // ),
     );
   }
 
@@ -208,7 +208,9 @@ class _StockPageState extends State<StockPage> {
 
   Widget _androidContainer(List<ImportModal> snapshot) {
     final List<ImportModal> filteredList = _filteredData.isNotEmpty ? _filteredData : snapshot;
+   var _totalProdct = filteredList.length.toString();
 
+   _totalProdct = _totalProdcts;
 
     return ListView.builder(
       itemCount: filteredList.length,
@@ -225,8 +227,6 @@ class _StockPageState extends State<StockPage> {
 
 
   Widget _webContainer(List<ImportModal> snapshot) {
-
-
     return Column(
       children: [
         _tableColumn(),
@@ -236,180 +236,182 @@ class _StockPageState extends State<StockPage> {
             itemBuilder: (context, index) {
 
 
-
               String productname = snapshot[index].product.toString();
               String timeStamp = snapshot[index].timeStamp.toString();
               String realprice = snapshot[index].realprice.toString();
 
               String saleprice =snapshot[index].saleprice.toString();
-              String quantity = snapshot[index].quantity.toString();
+              int quantity = snapshot[index].quantity;
               String note = snapshot[index].note.toString();
 
-
-
-
-
-
-
-              return Container(
-
-
-                margin: const EdgeInsets.symmetric(vertical: 10,horizontal: 10),
-                child: Container(
-                  decoration: BoxDecoration(
+              if(quantity==0){
+                return Container(
+                  margin: const EdgeInsets.symmetric(vertical: 10,horizontal: 10),
+                  child: Container(
+                    decoration: BoxDecoration(
 
                       // color: isSelected? Colors.red : Colors.white,
-                      borderRadius: BorderRadius.circular(10)
-                  ),
-                  child: Table(
-                    border: TableBorder.all(borderRadius: BorderRadius.circular(10)),
+                        borderRadius: BorderRadius.circular(10)
+                    ),
+                    child: Table(
+                      border: TableBorder.all(borderRadius: BorderRadius.circular(10)),
 
+                      // columnWidths: const <int, TableColumnWidth>{
+                      //   0: IntrinsicColumnWidth(),
+                      //   1: FlexColumnWidth(),
+                      //   2: FixedColumnWidth(),
+                      // },
+                      defaultVerticalAlignment: TableCellVerticalAlignment.middle,
 
-                    defaultVerticalAlignment: TableCellVerticalAlignment.middle,
+                      children: [
+                        TableRow(
 
-                    children: [
-                      TableRow(
+                          children: [
+                            TableCell(
+                              verticalAlignment: TableCellVerticalAlignment.middle,
+                              child: Container(
 
-                        children: [
-                          TableCell(
-                            verticalAlignment: TableCellVerticalAlignment.middle,
-                            child: Container(
-
-                              margin:
-                              const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                              child: Text(
-                                (index + 1).toString(),
-                                textAlign: TextAlign.center,
+                                margin:
+                                const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                                child: Text(
+                                  (index + 1).toString(),
+                                  textAlign: TextAlign.center,
+                                ),
                               ),
                             ),
-                          ),
-                          TableCell(
-                            verticalAlignment: TableCellVerticalAlignment.middle,
-                            child: Container(
-                              margin:
-                              const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                              child: Text(
-                                MethodHelper.ConvertTimeStampToDate(timeStamp),
-                                textAlign: TextAlign.start,
+                            TableCell(
+                              verticalAlignment: TableCellVerticalAlignment.middle,
+                              child: Container(
+                                margin:
+                                const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                                child: Text(
+                                  MethodHelper.ConvertTimeStampToDate(timeStamp),
+                                  textAlign: TextAlign.start,
+                                ),
                               ),
                             ),
-                          ),
-                          TableCell(
-                            verticalAlignment: TableCellVerticalAlignment.middle,
-                            child: Container(
-                              margin:
-                              const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                              child: Text(
-                                productname,
+                            TableCell(
+                              verticalAlignment: TableCellVerticalAlignment.middle,
+                              child: Container(
+                                margin:
+                                const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                                child: Text(
+                                  productname,
+                                ),
                               ),
                             ),
-                          ),
-                          TableCell(
-                            verticalAlignment: TableCellVerticalAlignment.middle,
-                            child: Container(
-                              margin:
-                              const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                              child: Row(
+                            TableCell(
+                              verticalAlignment: TableCellVerticalAlignment.middle,
+                              child: Container(
+                                margin:
+                                const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                                child: Column(
+                                    children: [
+                                      Text(
+                                        MethodHelper.formatCurrency(int.parse(realprice)),
+                                        textAlign: TextAlign.end,
+                                      ),
+
+
+                                    ]
+                                ),
+                              ),
+                            ),
+                            TableCell(
+                              verticalAlignment: TableCellVerticalAlignment.middle,
+                              child: Container(
+                                margin:
+                                const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                                child: Column(
                                   children: [
                                     Text(
-
-                                      MethodHelper.formatCurrency(int.parse(realprice)),
+                                      MethodHelper.formatCurrency(int.parse(saleprice)),
                                       textAlign: TextAlign.end,
-                                    ),
+                                    )
 
-
-
-                                  ]
+                                  ],
+                                ),
                               ),
                             ),
-                          ),
-                          TableCell(
-                            verticalAlignment: TableCellVerticalAlignment.middle,
-                            child: Container(
-                              margin:
-                              const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                              child: Column(
-                                children: [
-
-
-                                  Text(
-                                    MethodHelper.formatCurrency(int.parse(saleprice))
-                                   ,
-                                    textAlign: TextAlign.end,
-                                  )
-
-                                ],
+                            TableCell(
+                              verticalAlignment: TableCellVerticalAlignment.middle,
+                              child: Container(
+                                margin:
+                                const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                                child: Text(
+                                  MethodHelper.formatCurrency(quantity),
+                                  textAlign: TextAlign.end,
+                                ),
                               ),
                             ),
-                          ),
-                          TableCell(
-                            verticalAlignment: TableCellVerticalAlignment.middle,
-                            child: Container(
-                              margin:
-                              const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                              child: Text(
-                                MethodHelper.formatCurrency(int.parse(quantity)),
-                                textAlign: TextAlign.end,
+                            TableCell(
+                              verticalAlignment: TableCellVerticalAlignment.middle,
+                              child: Container(
+                                margin:
+                                const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                                child: Text(
+                                  note,
+                                ),
                               ),
                             ),
-                          ),
-                          TableCell(
-                            verticalAlignment: TableCellVerticalAlignment.middle,
-                            child: Container(
-                              margin:
-                              const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                              child: Text(
-                                note,
-                              ),
-                            ),
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              IconButton(
-                                  onPressed: () {
-                                    setState(() {
-                                      _editButtonOnpress(context, snapshot[index]);
-                                    });
-                                  },
-                                  tooltip: 'Edit',
-                                  icon: const Icon(
-                                    Icons.edit,
-                                    color: Colors.blue,
-                                  )),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                IconButton(
+                                    onPressed: () {
+                                      setState(() {
+                                        _editButtonOnpress(context, snapshot[index]);
+                                      });
+                                    },
+                                    tooltip: 'Edit',
+                                    icon: const Icon(
+                                      Icons.edit,
+                                      color: Colors.blue,
+                                    )),
 
-                              IconButton(
-                                  onPressed: () {
-                                    _showLoadingDialog(context, snapshot[index]);
-                                  },
-                                  tooltip: 'Delete',
-                                  icon: const Icon(
-                                    Icons.delete,
-                                    color: Colors.red,
-                                  )),
-                              IconButton(
-                                  onPressed: () {
-                                    setState(() {
+                                IconButton(
+                                    onPressed: () {
+                                      _showLoadingDialog(context, snapshot[index]);
+                                    },
+                                    tooltip: 'Delete',
+                                    icon: const Icon(
+                                      Icons.delete,
+                                      color: Colors.red,
+                                    )),
+                                IconButton(
+                                    onPressed: () {
+                                      setState(() {
 
-                                     ConstsData.addToCart(snapshot[index]);
+                                        ConstsData.addToCart(snapshot[index]);
 
 
-                                    });
+                                      });
 
-                                  },
-                                  tooltip: 'Add To Cart',
-                                  icon: const Icon(
-                                    Icons.add_shopping_cart,
-                                    color: Colors.red,
-                                  ))
-                            ],
-                          )
-                        ],
-                      ),
-                    ],
+                                    },
+                                    tooltip: 'Add To Cart',
+                                    icon: const Icon(
+                                      Icons.add_shopping_cart,
+                                      color: Colors.red,
+                                    ))
+                              ],
+                            )
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-              );
+                );
+
+              }else{
+
+                return SizedBox();
+              }
+
+
+
+
+
+
 
 
 
@@ -435,15 +437,7 @@ class _StockPageState extends State<StockPage> {
               InkWell(
 
                 onTap: (){
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) =>
-                          const AddNewImportProduct(updateModal: null))).then((value) => {
-
-
-
-                  });
+                  Navigator.of(context).pop();
                 },
                 child: Container(
 
@@ -455,36 +449,8 @@ class _StockPageState extends State<StockPage> {
                       borderRadius: BorderRadius.circular(30),color: Colors.red
                   ),
                   child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 10),
-                      child: Center(child: Text(ConstsName.addnew,style: TextStyle(color: Colors.white),))
-                  ),
-                ),
-              ),
-              InkWell(
-
-                onTap: (){
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) =>
-                          const OutOfStockPage())).then((value) => {
-
-
-
-                  });
-                },
-                child: Container(
-
-                  height: 70,
-
-                  margin: const EdgeInsets.symmetric(horizontal: 10,vertical: 20),
-                  decoration: BoxDecoration(
-
-                      borderRadius: BorderRadius.circular(30),color: Colors.red
-                  ),
-                  child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 10),
-                      child: Center(child: Text(ConstsName.outofStock,style: TextStyle(color: Colors.white),))
+                    padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 10),
+                    child: Center(child: Text(ConstsName.goback,style: TextStyle(color: Colors.white),))
                   ),
                 ),
               ),
@@ -497,13 +463,46 @@ class _StockPageState extends State<StockPage> {
       ],
     );
   }
-
+  // Widget _webContainer(List<ImportModal> snapshot) {
+  //   return Column(
+  //     children: [
+  //       // _tableColumn(),
+  //       Expanded(
+  //         child: ListView.builder(
+  //           itemCount: snapshot.length,
+  //           itemBuilder: (context, index) {
+  //             String productname = snapshot[index].product.toString();
+  //             String timeStamp = snapshot[index].timeStamp.toString();
+  //             String realprice = snapshot[index].realprice.toString();
+  //             String saleprice = snapshot[index].saleprice.toString();
+  //             String quantity = snapshot[index].quantity.toString();
+  //             String note = snapshot[index].note.toString();
+  //             return _buildExpansionTile(snapshot[index]);
+  //           },
+  //         ),
+  //       ),
+  //     ],
+  //   );
+  // }
 
   Widget _tableColumn() {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 10),
       child: Table(
+        // border: TableBorder.all(borderRadius: BorderRadius.circular(10)),
 
+
+        // border: TableBorder.symmetric(
+            // inside: const BorderSide(
+            //
+            //     width: 1.0,
+            //     style: BorderStyle.solid,
+            //     strokeAlign: BorderSide.strokeAlignInside)),
+        // columnWidths: const <int, TableColumnWidth>{
+        //   0: IntrinsicColumnWidth(),
+        //   1: FlexColumnWidth(),
+        //   2: FixedColumnWidth(),
+        // },
         defaultVerticalAlignment: TableCellVerticalAlignment.middle,
 
         children: [
@@ -609,8 +608,9 @@ class _StockPageState extends State<StockPage> {
                     decoration: BoxDecoration(borderRadius: BorderRadius.circular(10), color: Colors.grey,),
                     margin:
                     const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                    child: const Center(
-                      child: Text(ConstsName.Functions),
+                    child: Center(
+                      child: const
+                      Text(ConstsName.Functions),
                     ),
                   ))
             ],
@@ -810,11 +810,6 @@ class _StockPageState extends State<StockPage> {
               IconButton(
                   onPressed: () {
                     //   Add to card
-
-                    setState(() {
-
-                      ConstsData.mobileaddToCart(importModal);
-                    });
                   },
                   tooltip: ConstsName.addtocard,
                   icon: const Icon(

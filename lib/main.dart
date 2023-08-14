@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shwelamin/pages/stockPage.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:shwelamin/pages/login.dart';
 
@@ -30,7 +31,7 @@ class _MyAppState extends State<MyApp> {
 
       theme: ThemeData(primarySwatch: Colors.blueGrey),
 
-      home: const Scaffold(body: Login()),
+      home: const Scaffold(body: StockPage()),
     );
   }
 }

@@ -6,6 +6,13 @@ class ConstsName{
   static const proudctname = 'ပစ္စည်းအမည်';
   static const real_price = 'ဝယ်ဈေး';
   static const sale_price = 'ရောင်းဈေး';
+  static const unitPrice = 'နှုန်းထား';
+  static const unitQuantity = 'ဦးရေ';
+  static const totalAmount = 'ကျသင့်ငွေ';
+  static const Functions = 'လုပ်ဆောင်ချက်များ';
+  static const outofStock = 'မှာယူရမည့်စာရင်းများ';
+  static const goback = 'နောက်သို့ပြန်သွားမည်။';
+  static const ks = 'ကျပ်';
   static const quantity = 'အရေအတွက်';
   static const labelreal_price = 'ဝယ်ဈေး  * အင်္ဂလိပ်ဂဏန်း ဖြစ်ရပါမည်။';
   static const labelsale_price = 'ရောင်းဈေး  * အင်္ဂလိပ်ဂဏန်း ဖြစ်ရပါမည်။';
@@ -27,8 +34,8 @@ class ConstsName{
   static const saving = 'သိမ်းဆည်းနေပါသည်။';
   static const updating = 'ပြင်ဆင်နေပါသည်။';
   static const vialidnumber = 'အင်္ဂလိပ် နံပါတ် ဖြစ်ရပါမည်။';
-  static const lastmodifiedDate = 'နောက်ဆုံးပြင်ဆင်ခဲ့သည့်ရက်စွဲ';
-  static const addtocard = 'နောက်ဆုံးပြင်ဆင်ခဲ့သည့်ရက်စွဲ';
+  static const lastmodifiedDate = 'ရက်စွဲ';
+  static const addtocard = 'ဝယ်စာရင်းထည့်ရန်';
   static const serverURL = 'https://bswwgpraixghzllrqiaf.supabase.co';
   static const serverApiKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJzd3dncHJhaXhnaHpsbHJxaWFmIiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTExNTMwMDIsImV4cCI6MjAwNjcyOTAwMn0.R6T0OlVbdQLOK2eTr1buwoOUYgdccaf0rVd1D5HIAtA';
 }

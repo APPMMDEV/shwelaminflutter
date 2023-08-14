@@ -37,7 +37,6 @@ class _addnewimportPageState extends State<AddNewImportProduct> {
   bool engcontent_valid = false;
   bool imagelink_valid = false;
 
-
   bool isUpdate = false;
 
   String? imglinkfinal;
@@ -45,13 +44,15 @@ class _addnewimportPageState extends State<AddNewImportProduct> {
   String temporaryimg =
       'https://www.wikipedia.org/portal/wikipedia.org/assets/img/Wikipedia-logo-v2.png';
 
+
+
   @override
   void initState() {
     if (widget.updateModal != null) {
       productname_controller.text = widget.updateModal!.product;
       realprice_controller.text = widget.updateModal!.realprice;
       saleprice_controller.text = widget.updateModal!.saleprice;
-      quantity_controller.text = widget.updateModal!.quantity;
+      quantity_controller.text = widget.updateModal!.quantity.toString();
       note_controller.text = widget.updateModal!.note;
 
       _status = ConstsName.update;
@@ -77,19 +78,17 @@ class _addnewimportPageState extends State<AddNewImportProduct> {
         _isLoading = false;
         _status = ConstsName.successfullyupdate;
       });
-      Future.delayed(const Duration(seconds: 2), () {
-        Navigator.of(context).pop(); // Close the dialog
-      });
+
+      //
+      // Future.delayed(const Duration(seconds: 2), () {
+      //
+      //
+      //   Navigator.of(context).pop(); // Close the dialog
+      // });
     }).catchError((e) {
       setState(() {
         _status = ConstsName.error;
         // _status = e.toString();
-      });
-    }).whenComplete(() {
-      setState(() async {
-        _isLoading = false;
-        await Future.delayed(const Duration(seconds: 3));
-        _status = ConstsName.update;
       });
     });
   }
@@ -112,19 +111,25 @@ class _addnewimportPageState extends State<AddNewImportProduct> {
         _status = e.toString();
       });
       // _status = ConstsName.error;
-    }).whenComplete(() {
-      setState(() async {
-        _isLoading = false;
-        await Future.delayed(const Duration(seconds: 3));
-        _status = ConstsName.save;
-      });
     });
+    //
+    //     .whenComplete(() {
+    //   setState(() async {
+    //     _isLoading = false;
+    //     await Future.delayed(const Duration(seconds: 3));
+    //     _status = ConstsName.save;
+    //   });
+    // });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: Text(_titleText,style: const TextStyle(fontSize: 13),)),
+        appBar: AppBar(
+            title: Text(
+          _titleText,
+          style: const TextStyle(fontSize: 13),
+        )),
         body: SingleChildScrollView(
           child: Container(
             padding: const EdgeInsets.all(20),
@@ -141,6 +146,10 @@ class _addnewimportPageState extends State<AddNewImportProduct> {
                           child: Column(
                             children: [
                               Container(
+                                margin: const EdgeInsets.symmetric(
+                                    horizontal: 10, vertical: 5),
+                                child: Text(MethodHelper.ConvertTimeStampToDate(MethodHelper.getCurrentTimeStamp()))
+                              ), Container(
                                 margin: const EdgeInsets.symmetric(
                                     horizontal: 10, vertical: 5),
                                 child: TextFormField(
@@ -168,9 +177,13 @@ class _addnewimportPageState extends State<AddNewImportProduct> {
                                     validator: (value) {
                                       if (value!.isEmpty) {
                                         return "${ConstsName.real_price} can't be Empty";
-                                      }else {
+                                      } else {
                                         return null;
                                       }
+                                    },
+                                    onChanged: (value){
+
+
                                     },
                                     decoration: const InputDecoration(
                                         labelText: ConstsName.labelreal_price,
@@ -205,8 +218,6 @@ class _addnewimportPageState extends State<AddNewImportProduct> {
                                     inputFormatters: <TextInputFormatter>[
                                       FilteringTextInputFormatter.digitsOnly,
                                     ],
-
-
                                     validator: (value) {
                                       if (value!.isEmpty) {
                                         return "${ConstsName.quantity} can't be Empty";
@@ -257,9 +268,7 @@ class _addnewimportPageState extends State<AddNewImportProduct> {
       height: 60,
       child: ElevatedButton(
           onPressed: () {
-
             if (formkey.currentState!.validate()) {
-
               setState(() {
                 _isLoading = true;
                 _status = ConstsName.saving;
@@ -269,10 +278,11 @@ class _addnewimportPageState extends State<AddNewImportProduct> {
                   productname_controller.text,
                   realprice_controller.text,
                   saleprice_controller.text,
-                  quantity_controller
-                      .text, // var quantity_controller = TextEditingController();
+                  int.parse(quantity_controller
+                      .text) , // var quantity_controller = TextEditingController();
                   note_controller.text,
-              MethodHelper.getCurrentTimeStamp());
+
+                  MethodHelper.getCurrentTimeStamp());
 
               SaveData(saveinputmodal);
             }
@@ -294,21 +304,24 @@ class _addnewimportPageState extends State<AddNewImportProduct> {
       height: 60,
       child: ElevatedButton(
           onPressed: () {
-
             if (formkey.currentState!.validate()) {
               setState(() {
                 _isLoading = true;
-                _status = ConstsName.saving;
+
               });
+
+
               ImportModal updateInputModal = ImportModal(
                   widget.updateModal!.id,
                   productname_controller.text,
                   realprice_controller.text,
                   saleprice_controller.text,
-                  quantity_controller
-                      .text, // var quantity_controller = TextEditingController();
+                  int.parse(quantity_controller
+                      .text) , // var quantity_controller = TextEditingController();
                   note_controller.text,
-                  MethodHelper.getCurrentTimeStamp());
+
+                  MethodHelper.getCurrentTimeStamp(),
+              );
 
               UpdateData(updateInputModal);
             }
@@ -323,6 +336,4 @@ class _addnewimportPageState extends State<AddNewImportProduct> {
           ])),
     );
   }
-
-
 }

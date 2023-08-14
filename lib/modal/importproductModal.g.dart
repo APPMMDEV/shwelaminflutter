@@ -11,7 +11,7 @@ ImportModal _$ImportModalFromJson(Map<String, dynamic> json) => ImportModal(
       json['product'] as String,
       json['realprice'] as String,
       json['saleprice'] as String,
-      json['quantity'] as String,
+      json['quantity'] as int,
       json['note'] as String,
       json['timeStamp'] as String,
     );
